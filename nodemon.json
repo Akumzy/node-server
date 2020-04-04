@@ -1,0 +1,9 @@
+{
+  "watch": ["src"],
+  "exec": "ts-node --project tsconfig.json src/index.ts",
+  "ext": "js ts",
+  "events": {
+    "restart": "kill-port 3000",
+    "crash": "kill-port 3000"
+  }
+}
