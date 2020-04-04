@@ -1,5 +1,5 @@
 import { join } from 'path'
-
+import { SameSitePolicy } from '@hapi/hapi'
 import Joi from '@hapi/joi'
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -19,7 +19,6 @@ const envVarsSchema = Joi.object({
   DB_AUTH_SOURCE: Joi.string().required(),
 }).unknown(true)
 
-
 const { error, value: envVars } = envVarsSchema.validate(process.env)
 if (error) {
   throw new Error(`Config validation error: ${error.message}`)
@@ -38,12 +37,12 @@ export default {
   },
   token_cookie_options: {
     ttl: 7 * 24 * 60 * 60 * 1000, // expires a seven days from today
-    encoding: 'none', // we already used JWT to encode
+    encoding: 'none' as 'none', // we already used JWT to encode
     isSecure: !isDev, // warm & fuzzy feelings
     isHttpOnly: false, // prevent client alteration
     clearInvalid: true, // remove invalid cookies
     strictHeader: true, // don't allow violations of RFC 6265,
-    isSameSite: 'Lax',
+    isSameSite: 'Lax' as SameSitePolicy,
     path: '/',
   },
 }
