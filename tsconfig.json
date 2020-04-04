@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "es2017",
+    "isolatedModules": false,
+    "noEmit": false,
+    "types": ["jest", "node"]
+  },
+  "include": ["src/**/*.ts"]
+}
